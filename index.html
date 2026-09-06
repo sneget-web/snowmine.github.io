@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Хронология серверов</title>
+    
+    <!-- Подключаем иконку сайта -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="site-background" id="bg-element"></div>
+
+    <!-- Плашка «Сайт в разработке» слева сверху -->
+    <div class="top-nav-left">
+        <div class="dev-badge">
+            <div class="dev-dot"></div>
+            Сайт в разработке
+        </div>
+    </div>
+
+    <!-- Кнопки навигации справа сверху -->
+    <div class="top-nav">
+        <!-- <a href="ССЫЛКА_НА_ДИСКОРД" target="_blank" class="discord-btn">Дискорд</a>  -->
+        <a href="https://тирлист" target="_blank" class="btn">Тир-лист</a>
+        <a href="https://t.me/snowmine1" target="_blank" class="btn">ТГК</a>
+    </div>
+
+    <div class="timeline-wrapper" id="scroll-container">
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h1 id="modal-title"></h1>
+            <h3 id="modal-version" style="color: #4CAF50;"></h3>
+            
+            <!-- Сюда будет динамически собираться весь наш кастомный контент -->
+            <div id="modal-body-content"></div>
+
+            <a href="#" id="modal-download" target="_blank" class="download-btn">Скачать мир</a>
+        </div>
+    </div>
+
+    <script>const seasons = [];</script>
+    
+    <!-- Подключаем сезоны -->
+    <script src="data/season1.js"></script>
+    <!-- <script src="data/season2.js"></script> -->
+    
+    <script src="app.js"></script>
+    
+    <!-- Лайтбокс для просмотра фото на полный экран -->
+    <div class="image-lightbox" id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="Полный размер">
+    </div>
+</body>
+</html>
