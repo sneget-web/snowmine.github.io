@@ -6,7 +6,7 @@
     <title>Хронология серверов</title>
     
     <!-- Подключаем иконку сайта -->
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="images\favicon42.png">
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -31,7 +31,17 @@
     <div class="timeline-wrapper" id="scroll-container">
         <div class="timeline" id="timeline"></div>
     </div>
+    <!-- Индикаторы края (маркеры таймлайна) -->
+<!-- Индикаторы края (маркеры таймлайна) -->
+    <div id="scroll-indicator-left" class="scroll-indicator left" title="Есть сезоны в прошлом"></div>
+    <div id="scroll-indicator-right" class="scroll-indicator right" title="Есть сезоны в будущем"></div>
 
+    <!-- Всплывающая оранжевая полоса прогресса снизу -->
+    <div id="bottom-progress-container" class="bottom-progress-container">
+        <div id="bottom-progress-bar" class="bottom-progress-bar"></div>
+    </div>
+
+    
     <!-- Модальное окно -->
     <div class="modal" id="modal">
         <div class="modal-content">
@@ -50,12 +60,17 @@
     
     <!-- Подключаем сезоны -->
     <script src="data/season1.js"></script>
+    <script src="data/season1SB.js"></script>
+    <script src="data/season2.js"></script>
+    <script src="data/season3.js"></script>
+    <script src="data/season4.js"></script>
+    <script src="data/season5.js"></script>
     <!-- <script src="data/season2.js"></script> -->
     
     <script src="app.js"></script>
     
-    <!-- Лайтбокс для просмотра фото на полный экран -->
-    <div class="image-lightbox" id="lightbox" onclick="this.style.display='none'">
+<!-- Лайтбокс для просмотра фото -->
+    <div class="image-lightbox" id="lightbox">
         <img id="lightbox-img" src="" alt="Полный размер">
     </div>
 </body>

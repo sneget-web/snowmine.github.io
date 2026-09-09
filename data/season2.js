@@ -1,39 +1,56 @@
 seasons.push({
     id: 1,
-    date: "Сентябрь 2022",
-    title: "Сезон 2: Начало",
-    version: "Майнкрафт 1.18",
+    date: "Январь 2024",
+    dateValue: "2024.1",
+    title: "Сезон 2",
+    version: "Майнкрафт 1.20.1",
     
     // Картинка, которая показывается на таймлайне при наведении (можно несколько для рандома)
     randomImages: [
-        "images/season1/2023-08-26_20.01.22.png"
+        "images/season2/14.01.2024.png",
+        "images/season2/2024-01-13_23-14-34.png" ,
+        "images/season2/2024-01-14_19-47-05.png" ,
+        "images/season2/2024-01-15_20.44.12.png" ,
+        "images/season2/2024-01-15_22-44-22.png" ,
+        "images/season2/2024-01-15_22-44-35.png" ,
+        "images/season2/2024-01-16_21-42-55.png" ,
+        "images/season2/2024-01-16_21-45-15.png"
     ],
 
     // 1. Твой ручной порядок текста и картинок в модалке
     content: [
         {
             type: "text",
-            value: "Здесь начинается наш первый абзац текста про то, как мы только зашли на сервер."
+            value: "Об этом сезоне будет написано позже."
         },
         {
-            type: "image",
-            url: "images/season1/2023-08-26_20.01.22.png", 
-            caption: "Наша самая первая убогая землянка на склоне горы."
-        },
-        {
-            type: "text",
-            value: "Потом мы начали развиваться, построили первые фермы и добыли алмазы."
-        },
-        {
-            type: "image",
-            url: "images/season1/2023-09-01_20-21-55.png",
-            caption: "Хулиганы напали на дома Егора."
+            type: "players",
+            title: "Состав участников:",
+            list: [
+                { name: "Mes4000", head: "images/heads/mes.png", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
+                { name: "sneget_", head: "images/heads/sneget.png", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
+                { name: "danil_lisov", head: "images/heads/danil.jpg", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
+                { name: "Zar0813", altNames: ["Zar0813", "зар", "Захар"]  }, 
+                "anhcous0018"   ,
+                { name: "KiberNagibator", altNames: ["KiberNagibator", "Лапша", "Насвай", "o da doza"]  },
+                { name: "Jerty", altNames: ["Jerty", "Арсений", "Montana", "jez3as"]  },
+                { name: "Saba228", altNames: ["Saba228", "Сава", "свиноблуд"] },
+                { name: "Maksos_0909", altNames: ["Maksos_0909", "Максос", "Maksimka"] },
+                { name: "Bebronix45", altNames: ["Bebronix45", "Марк", "Маркер"] }
+            ]
         }
     ],
 
     // 2. ВСЕ картинки этого сезона (нужно для автоматического хвоста в конце)
     allImages: [
-        "images/season1/2023-08-26_20.01.22.png"
+        "images/season2/14.01.2024.png",
+        "images/season2/2024-01-13_23-14-34.png" ,
+        "images/season2/2024-01-14_19-47-05.png" ,
+        "images/season2/2024-01-15_20.44.12.png" ,
+        "images/season2/2024-01-15_22-44-22.png" ,
+        "images/season2/2024-01-15_22-44-35.png" ,
+        "images/season2/2024-01-16_21-42-55.png" ,
+        "images/season2/2024-01-16_21-45-15.png"
     ],
     
     worldLink: ""

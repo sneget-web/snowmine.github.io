@@ -1,6 +1,7 @@
 seasons.push({
     id: 1,
     date: "Август 2023",
+    dateValue: "2023.8",
     title: "Сезон 1",
     version: "Майнкрафт 1.20.1",
     
@@ -59,9 +60,17 @@ seasons.push({
             caption: "Воришка в доме Семёна. 25 Августа."
         },
         {
-            type: "text",
-            value: "Состав игроков: sneget_ danil_lisov Mes Zar0813 anhcous0018"
-        }
+            type: "players",
+            title: "Состав участников:",
+            list: [
+                { name: "Mes4000", head: "images/heads/mes.png", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
+                { name: "sneget_", head: "images/heads/sneget.png", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
+                { name: "danil_lisov", head: "images/heads/danil.jpg", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
+                { name: "Zar0813", altNames: ["Zar0813", "зар", "Захар"]  },    
+                "anhcous0018"
+
+            ]
+        }   
     ],
 
     // 2. ВСЕ картинки этого сезона (нужно для автоматического хвоста в конце)
