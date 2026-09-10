@@ -20,34 +20,80 @@ function getYearFraction(dateValue) {
 
 // --- СПИСОК ВСЕХ ЛОКАЛЬНЫХ ГОЛОВ ДЛЯ РАНДОМА ---
 const fallbackHeads = [
-    "images/heads/2dd53cccfdcf524b44f9cfeb78b7136e.jpg",
-    "images/heads/5a339e704816608612a25249236866ee.jpg",
-    "images/heads/5b1a0afde84d583e4d7e0b383df891b6.jpg",
-    "images/heads/6c18d5c275a2c6154fe0cbcf51da6a80.jpg",
-    "images/heads/6f1e69cd52eda9edf3323d12ac8dc97d.jpg",
-    "images/heads/7e8d6996511a008131fff6f446fa1833.jpg",
-    "images/heads/58c627cae896636a7375b0ab78b6e4ce.jpg",
-    "images/heads/67b08c6f88e6aa78b8373cebc2265318.jpg",
-    "images/heads/85eab929a7dca982a46dd2a00443e9b7.jpg",
-    "images/heads/319dcb893b6e1124c2d28a12569aebd6.jpg",
-    "images/heads/427e14f51e753ddee3ced92980fecd8e.jpg",
-    "images/heads/646d2830b667c8e203ea483f501f00cb.jpg",
-    "images/heads/909c2238c5edd06912ac1ad6a3c31968.jpg",
-    "images/heads/3024c86002544104d4ce2999b6ee3514.jpg",
-    "images/heads/856924af9719419ddff5e3d71935877f.jpg",
-    "images/heads/840984620e8c437595ce7946147db34c.jpg",
-    "images/heads/a707efe13cbf865ba72b5c48ff261ea3.jpg",
-    "images/heads/ad46b50918e0a8ba0a266e674eafac75.jpg",
-    "images/heads/b5ec9586eef23231333f5206704434a9.jpg",
-    "images/heads/b5ffbf938edef3c1aa312491857dc76c.jpg",
-    "images/heads/bcc08ed6414114489ef9c0df25226a96.jpg",
-    "images/heads/bd8f2acc74af3e0e0c68079dd3961a4f.jpg",
-    "images/heads/c6d9d2f704df2983bfa187543b655e14.jpg",
-    "images/heads/d7e1cb5708df0c214eac4da6cb6dda51.jpg",
-    "images/heads/e746383410960961d6daab30b90be263.jpg",
-    "images/heads/head1.jpg",
-    "images/heads/head2.jpg",
-    "images/heads/head3.jpg"
+    "images/heads/!danil.webp",
+    "images/heads/!mes.webp",
+    "images/heads/!shuranells.webp",
+    "images/heads/!sneget.webp",
+    "images/heads/head1.webp",
+    "images/heads/head2.webp",
+    "images/heads/head3.webp",
+    "images/heads/head4.webp",
+    "images/heads/head5.webp",
+    "images/heads/head6.webp",
+    "images/heads/head7.webp",
+    "images/heads/head8.webp",
+    "images/heads/head9.webp",
+    "images/heads/head10.webp",
+    "images/heads/head11.webp",
+    "images/heads/head12.webp",
+    "images/heads/head13.webp",
+    "images/heads/head14.webp",
+    "images/heads/head15.webp",
+    "images/heads/head16.webp",
+    "images/heads/head17.webp",
+    "images/heads/head18.webp",
+    "images/heads/head19.webp",
+    "images/heads/head20.webp",
+    "images/heads/head21.webp",
+    "images/heads/head22.webp",
+    "images/heads/head23.webp",
+    "images/heads/head24.webp",
+    "images/heads/head25.webp",
+    "images/heads/head26.webp",
+    "images/heads/head27.webp",
+    "images/heads/head28.webp",
+    "images/heads/head29.webp",
+    "images/heads/head30.webp",
+    "images/heads/head31.webp",
+    "images/heads/head32.webp",
+    "images/heads/head33.webp",
+    "images/heads/head34.webp",
+    "images/heads/head35.webp",
+    "images/heads/head36.webp",
+    "images/heads/head37.webp",
+    "images/heads/head38.webp",
+    "images/heads/head39.webp",
+    "images/heads/head40.webp",
+    "images/heads/head41.webp",
+    "images/heads/head42.webp",
+    "images/heads/head43.webp",
+    "images/heads/head44.webp",
+    "images/heads/head45.webp",
+    "images/heads/head46.webp",
+    "images/heads/head47.webp",
+    "images/heads/head48.webp",
+    "images/heads/head49.webp",
+    "images/heads/head50.webp",
+    "images/heads/head51.webp",
+    "images/heads/head52.webp",
+    "images/heads/head53.webp",
+    "images/heads/head54.webp",
+    "images/heads/head55.webp",
+    "images/heads/head56.webp",
+    "images/heads/head57.webp",
+    "images/heads/head58.webp",
+    "images/heads/head59.webp",
+    "images/heads/head60.webp",
+    "images/heads/head61.webp",
+    "images/heads/head62.webp",
+    "images/heads/head63.webp",
+    "images/heads/head64.webp",
+    "images/heads/head65.webp",
+    "images/heads/head66.webp",
+    "images/heads/head67.webp",
+    "images/heads/head68.webp",
+    "images/heads/head69.webp",
+    "images/heads/head70.webp"
 ];
 
 function getRandomFallbackHead() {
@@ -564,24 +610,24 @@ window.addEventListener('click', (evt) => {
 
 // --- СЛУЧАЙНЫЙ ФОН С ТАЙМЕРОМ СМЕНЫ ---
 const backgroundImages = [
-    "images/season1/2023-08-31_21.26.25.png",
-    "images/season1/2023-08-26_20.01.22.png",
-    "images/season1/2023-08-31_21.25.29.png",
-    "images/season1/2023-08-31_21.26.04.png",
-    "images/season1/2023-09-01_20-21-55.png",
-    "images/season1SB/2023-10-13_18-15-31.png",
-    "images/season2/14.01.2024.png",
-    "images/season2/2024-01-15_20.44.12.png",
-    "images/season3/16.02.2024.png",
-    "images/season3/Base_Profile_Screenshot_2024.02.08_-_15.24.00.25.png",
-    "images/season5/2025-02-17_16.07.07.png",
-    "images/season5/2025-02-20_20.08.35.png",
-    "images/season5/2025-02-22_11.17.23.png",
-    "images/season5/2025-03-01_23.57.55.png",
-    "images/season5/2025-03-01_23.58.37.png",
-    "images/season5/2025-03-02_00.13.22.png",
-    "images/season6/468.png",
-    "images/seasone create/2026-07-20_01.42.48.png"
+    "images/backgrounds/14.01.2024-converted.webp",
+    "images/backgrounds/16.02.2024-converted.webp",
+    "images/backgrounds/468-converted.webp",
+    "images/backgrounds/2023-08-26_20.01.22 (1)-converted.webp",
+    "images/backgrounds/2023-08-31_21.25.29-converted.webp",
+    "images/backgrounds/2023-08-31_21.26.04-converted.webp",
+    "images/backgrounds/2023-08-31_21.26.25-converted.webp",
+    "images/backgrounds/2023-09-01_20-21-55-converted.webp",
+    "images/backgrounds/2023-10-13_18-15-31-converted.webp",
+    "images/backgrounds/2024-01-15_20.44.12-converted.webp",
+    "images/backgrounds/2025-02-17_16.07.07-converted.webp",
+    "images/backgrounds/2025-02-20_20.08.35-converted.webp",
+    "images/backgrounds/2025-02-22_11.17.23-converted.webp",
+    "images/backgrounds/2025-03-01_23.57.55-converted.webp",
+    "images/backgrounds/2025-03-01_23.58.37-converted.webp",
+    "images/backgrounds/2025-03-02_00.13.22-converted.webp",
+    "images/backgrounds/2026-07-20_01.42.48-converted.webp",
+    "images/backgrounds/Base_Profile_Screenshot_2024.02.08_-_15.24.00.25-converted.webp"
 ];
 
 let lastSelectedImage = "";
@@ -656,7 +702,7 @@ if (scrollContainer) {
     });
 }
 
-// Расчёт позиции таймлайна по координате X
+// Расчёт позиции таймлайна и плавная доводка к курсору
 function seekTimelineByMouse(e) {
     if (!progressContainer || !scrollContainer) return;
 
@@ -666,11 +712,15 @@ function seekTimelineByMouse(e) {
 
     const maxScrollLeft = scrollContainer.scrollWidth - scrollContainer.clientWidth;
     
-    // Мгновенная прокрутка таймлайна за курсором
-    scrollContainer.scrollLeft = ratio * maxScrollLeft;
+    // Передаем целевую позицию в сглаженную анимацию
+    targetScroll = ratio * maxScrollLeft;
 
-    if (typeof updateScrollIndicators === 'function') updateScrollIndicators();
-    if (typeof updateProgressBar === 'function') updateProgressBar();
+    // Запускаем цикл плавного скролла, если он ещё не работает
+    if (!isScrolling) {
+        currentScroll = scrollContainer.scrollLeft;
+        isScrolling = true;
+        requestAnimationFrame(smoothScrollLoop);
+    }
 }
 
 // Перетаскивание зажатой мышью

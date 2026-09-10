@@ -16,7 +16,7 @@ body {
     height: 100vh;
     background-size: cover;
     background-position: center;
-    filter: blur(10px) brightness(0.4); /* Размытие и затемнение для читаемости */
+    filter: brightness(0.4); /* Размытие и затемнение для читаемости */
     transform: scale(1.1); /* Увеличиваем, чтобы не было белых краев при размытии */
     z-index: -1; /* Отправляем на задний план под весь контент */
     transition: background-image 1.5s ease-in-out;
@@ -73,20 +73,28 @@ gap: 15px;
     100% { transform: scale(0.95); opacity: 0.8; }
 }
 
+/* Перевод основных зелёных кнопок на оранжевый цвет */
 .btn {
-    background-color: #4CAF50;
+    background-color: #2E7D32; /* Чуть более спокойный зелёный фон */
     color: white;
     padding: 10px 20px;
     text-decoration: none;
     font-weight: bold;
-    border: 2px solid #2E7D32;
-    border-radius: 4px;
-    transition: transform 0.2s;
+    border: 2px solid #4CAF50; /* Яркая зелёная обводка */
+    border-radius: 6px;
+    
+    /* Та самая чёрная размытая тень вокруг кнопки */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8); 
+    
+    /* Плавная анимация для тени и позиции */
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
 }
 
+/* Эффект при наведении на кнопку */
 .btn:hover {
-    transform: scale(1.05);
-    background-color: #45a049;
+    transform: scale(1.05) translateY(-2px); /* Кнопка слегка "взлетает" */
+    background-color: #4CAF50; /* Становится ярче */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 1); /* Тень становится больше и гуще */
 }
 
 /* Кнопка Discord в фирменных цветах (на будущее) */
@@ -315,8 +323,15 @@ gap: 15px;
     margin: 20px 0;
 }
 
+/* Принудительный оранжевый цвет для версии игры (перебивает inline-стиль из HTML) */
+#modal-version,
 .players-title {
-    color: #4CAF50;
+    color: #4CAF50 !important; 
+}
+
+.modal-content h3,
+.modal-content h4 {
+    color: #ffffff;
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
@@ -337,6 +352,7 @@ gap: 15px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-sizing: border-box;
     transition: transform 0.1s ease;
+    user-select: none; /* Запрещает выделение текста синим цветом при кликах */
 }
 
 /* Эффект при клике (когда кнопка мыши зажата) */
@@ -393,24 +409,24 @@ gap: 15px;
     transition: transform 0.3s ease-out; 
 }
 
-
-/* --- КРАЕВЫЕ ИНДИКАТОРЫ (БАТЛПАСС-МАРКЕРЫ) --- */
-/* --- КРАЕВЫЕ ИНДИКАТОРЫ С АНИМАЦИЕЙ УВЕЛИЧЕНИЯ/УМЕНЬШЕНИЯ --- */
+/* --- КРАЕВЫЕ ИНДИКАТОРЫ ПРОКРУТКИ --- */
 .scroll-indicator {
     position: fixed;
     top: 50%;
-    transform: translateY(-50%) scale(0); /* По умолчанию точка уменьшена в 0 */
-    width: 26px;
-    height: 26px;
-    background-color: #ff9800;
+    transform: translateY(-50%) scale(0); 
+    width: 40px;
+    height: 40px;
+    background-color: rgba(30, 30, 36, 0.85);
     border-radius: 50%;
-    border: 4px solid #fff;
-    box-shadow: 0 0 15px rgba(0,0,0,0.7);
+    border: 3px solid #ff9800; /* Сплошная оранжевая обводка */
+    box-shadow: 0 0 12px rgba(255, 152, 0, 0.4);
     z-index: 150;
     cursor: pointer;
     opacity: 0;
-    /* Плавное масштабирование и появление */
-    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.2s, border-color 0.2s;
 }
 
 .scroll-indicator.left {
@@ -421,35 +437,74 @@ gap: 15px;
     right: 20px;
 }
 
-/* При появлении плавно вырастает из 0 в normal (1) */
+/* Создание жирной стрелочки влево (<) */
+.scroll-indicator.left::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-left: 3px solid #ff9800;
+    border-bottom: 3px solid #ff9800;
+    transform: rotate(45deg);
+    margin-left: 4px;
+    transition: border-color 0.2s;
+}
+
+/* Создание жирной стрелочки вправо (>) */
+.scroll-indicator.right::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-right: 3px solid #ff9800;
+    border-top: 3px solid #ff9800;
+    transform: rotate(45deg);
+    margin-right: 4px;
+    transition: border-color 0.2s;
+}
+
+/* Появление и анимация пульсации */
 .scroll-indicator.show {
     opacity: 1;
     transform: translateY(-50%) scale(1);
+    animation: indicator-pulse 2s infinite;
 }
 
+/* Эффект при наведении */
 .scroll-indicator.show:hover {
-    transform: translateY(-50%) scale(1.35);
-    background-color: #ff5722;
+    animation: none;
+    transform: translateY(-50%) scale(1.15);
+    background-color: #ff9800;
+    border-color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 152, 0, 0.8);
 }
 
-/* --- КЛИКАБЕЛЬНАЯ И ПОЛНОЭКРАННАЯ ПОЛОСА ПРОГРЕССА СНИЗУ --- */
+.scroll-indicator.show:hover::before {
+    border-color: #ffffff; /* Стрелка становится белой при наведении */
+}
+
+@keyframes indicator-pulse {
+    0% { box-shadow: 0 0 8px rgba(255, 152, 0, 0.3); }
+    50% { box-shadow: 0 0 18px rgba(255, 152, 0, 0.7); }
+    100% { box-shadow: 0 0 8px rgba(255, 152, 0, 0.3); }
+}
+
 .bottom-progress-container {
     position: fixed;
-    bottom: -16px; /* Прячется за нижним краем */
+    bottom: -8px; /* Убирается за край экрана по своей высоте */
     left: 0;
     width: 100vw;
-    height: 16px;
+    height: 10px;  /* Уменьшенная высота полоски */
     background: rgba(20, 20, 20, 0.6);
     backdrop-filter: blur(6px);
     z-index: 200;
-    cursor: pointer; /* Указатель клика */
+    cursor: pointer;
     opacity: 0;
-    user-select: none;
     pointer-events: auto;
-    transition: bottom 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    user-select: none;
+    transition: bottom 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
 }
 
-/* Вылезает снизу при скролле или когда на неё наводят мышкой */
 .bottom-progress-container.active,
 .bottom-progress-container:hover {
     bottom: 0;
