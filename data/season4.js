@@ -31,10 +31,7 @@ seasons.push({
             type: "players",
             title: "Состав участников:",
             list: [
-                { name: "Mes4000", head: "images/heads/mes.png" },       // Получит случайную голову из папки heads
-                { name: "sneget_", head: "images/heads/sneget.png" },       // Получит случайную голову из папки heads
-                { name: "danil_lisov", head: "images/heads/danil.jpg" } ,
-                { name: "KiberNagibator", altNames: ["KiberNagibator", "Лапша", "Насвай", "o da doza"]  }
+                { name: "Покачто не"}    // Получит случайную голову из папки heads
             ]
         }
     ],

@@ -63,10 +63,10 @@ seasons.push({
             type: "players",
             title: "Состав участников:",
             list: [
-                { name: "Mes4000", head: "images/heads/mes.png", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
-                { name: "sneget_", head: "images/heads/sneget.png", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
-                { name: "danil_lisov", head: "images/heads/danil.jpg", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
-                { name: "Zar0813", altNames: ["Zar0813", "зар", "Захар"]  },    
+                { name: "Mes4000", head: "images/heads/!mes.webp", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
+                { name: "sneget_", head: "images/heads/!sneget.webp", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
+                { name: "danil_lisov", head: "images/heads/!danil.webp", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
+                { name: "Zar0813", altNames: ["Zar0813", "зар", "зар танк", "Захар"]  },   
                 "anhcous0018"
 
             ]

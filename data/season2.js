@@ -27,15 +27,15 @@ seasons.push({
             type: "players",
             title: "Состав участников:",
             list: [
-                { name: "Mes4000", head: "images/heads/mes.png", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
-                { name: "sneget_", head: "images/heads/sneget.png", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
-                { name: "danil_lisov", head: "images/heads/danil.jpg", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
-                { name: "Zar0813", altNames: ["Zar0813", "зар", "Захар"]  }, 
+                { name: "Mes4000", head: "images/heads/!mes.webp", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
+                { name: "sneget_", head: "images/heads/!sneget.webp", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
+                { name: "danil_lisov", head: "images/heads/!danil.webp", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,   // Получит случайную голову из папки heads
+                { name: "Zar0813", altNames: ["Zar0813", "зар", "зар танк", "Захар"]  }, 
                 "anhcous0018"   ,
                 { name: "KiberNagibator", altNames: ["KiberNagibator", "Лапша", "Насвай", "o da doza"]  },
-                { name: "Jerty", altNames: ["Jerty", "Арсений", "Montana", "jez3as"]  },
-                { name: "Saba228", altNames: ["Saba228", "Сава", "свиноблуд"] },
-                { name: "Maksos_0909", altNames: ["Maksos_0909", "Максос", "Maksimka"] },
+                { name: "Jerty", altNames: ["Jerty", "Арсений", "Montana", "Жирти", "Жирнов", "Джирти", "jez3as"]  },
+                { name: "Saba228", altNames: ["Saba228", "Сава", "Повар"] },
+                { name: "Maksos_0909", altNames: ["Maksos_0909", "Максос", "Maksimka", "Макс", "Максим"] },
                 { name: "Bebronix45", altNames: ["Bebronix45", "Марк", "Маркер"] }
             ]
         }

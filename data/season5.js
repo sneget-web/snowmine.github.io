@@ -91,9 +91,7 @@ seasons.push({
             type: "players",
             title: "Состав участников:",
             list: [
-                { name: "sneget_", head: "images/heads/sneget.png" },       // Получит случайную голову из папки heads
-                { name: "danil_lisov", head: "images/heads/danil.jpg" } ,  
-                "shuranella"
+                { name: "Покачто не"}    // Получит случайную голову из папки heads
             ]
         }
     ],
