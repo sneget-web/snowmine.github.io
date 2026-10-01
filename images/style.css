@@ -5,6 +5,7 @@ body {
     color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
     overflow: hidden; 
+
 }
 
 /* Фиксированный размытый фон на весь экран */
@@ -12,8 +13,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%; /* Было 100vw */
+    height: 100%; /* Было 100vh */
     background-size: cover;
     background-position: center;
     filter: brightness(0.4); /* Размытие и затемнение для читаемости */
@@ -49,10 +50,10 @@ gap: 15px;
     background-color: rgba(255, 152, 0, 0.15); /* Полупрозрачный оранжевый фон */
     color: #ff9800; /* Яркий оранжевый текст */
     padding: 10px 18px;
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     font-weight: bold;
     border: 1px dashed #ff9800; /* Пунктирная рамка */
-    border-radius: 4px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -109,17 +110,16 @@ gap: 15px;
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.discord-btn:hover {
-    transform: scale(1.05);
-    background-color: #4752C4;
-}
 
 .timeline-wrapper {
-    width: 100vw;
-    height: 100vh;
-    overflow-x: auto; 
-    overflow-y: hidden;
-    position: relative; /* Убираем flex, чтобы таймлайн мог свободно растягиваться на тысячи пикселей */
+    width: 100%; 
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center; /* Центрирует таймлайн строго по вертикали экрана */
 }
 
 .timeline-wrapper::-webkit-scrollbar {
@@ -127,10 +127,8 @@ gap: 15px;
 }
 
 .timeline {
-    display: block; /* Меняем с flex на block, так как используем absolute */
     position: relative;
-    height: 100vh;
-    /* Ширина теперь задается динамически через JavaScript */
+    height: 0;
 }
 
 .timeline::before {
@@ -138,24 +136,19 @@ gap: 15px;
     position: absolute;
     top: 50%;
     left: 0;
-    width: 100%; /* Растягится на всю динамическую ширину контейнера */
-    height: 4px;
+    width: 100%;
+    height: 6px; /* Было 4px[cite: 12] */
     background-color: #888;
     transform: translateY(-50%);
     z-index: 1;
 }
 
-.timeline-wrapper {
-    position: relative;
-    overflow: hidden;
-}
-
 
 .season-node {
-    position: absolute; /* Теперь точки позиционируются абсолютно по оси X */
+    position: absolute; /* Меняем relative на absolute */
     top: 50%;
-    transform: translate(-50%, -50%); /* Центрируем относительно точки на линии */
-    width: 250px;
+    transform: translate(-50%, -50%); /* Поднимает карточку ровно на линию */
+    width: 290px; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -163,12 +156,13 @@ gap: 15px;
     cursor: pointer;
 }
 
+/* 3. Делаем кружочки крупнее (были 24х24px[cite: 12]) */
 .dot {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     background-color: #ff9800;
     border-radius: 50%;
-    border: 4px solid #fff;
+    border: 5px solid #fff; /* Рамку тоже сделали чуть толще[cite: 12] */
     transition: transform 0.3s, background-color 0.3s;
 }
 
@@ -178,15 +172,15 @@ gap: 15px;
 }
 
 .date {
-    margin-top: 15px;
-    font-size: 1.2rem;
+    margin-top: 20px; /* Сделали отступ больше, так как кружок вырос[cite: 12] */
+    font-size: 1.45rem; 
     color: #ccc;
     text-align: center;
 }
 
 .hover-image-container {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px; /* Было 40px[cite: 12] */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, bottom 0.3s;
@@ -206,7 +200,7 @@ gap: 15px;
 .season-node:hover .hover-image-container {
     opacity: 1;
     visibility: visible;
-    bottom: 50px;
+    bottom: 60px; /* Было 50px[cite: 12] */
 }
 
 /* Модалка */
@@ -216,8 +210,8 @@ gap: 15px;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%; 
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
     z-index: 1000;
     justify-content: center;
@@ -226,22 +220,6 @@ gap: 15px;
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.modal-content {
-    background-color: #2c2c34;
-    width: 80%;
-    max-width: 800px;
-    max-height: 90vh;
-    overflow-y: auto;
-    padding: 30px;
-    border-radius: 8px;
-    position: relative;
-    border: 2px solid #555;
-    
-    /* Начальное положение (когда окно закрыто) — смещено вниз */
-    transform: translateY(50px);
-    opacity: 0;
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-}
 
 /* Класс состояния "Открыто" */
 .modal.show {
@@ -254,15 +232,7 @@ gap: 15px;
     opacity: 1;
 }
 
-.close-btn {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    color: #aaa;
-    font-size: 30px;
-    font-weight: bold;
-    cursor: pointer;
-}
+
 
 .close-btn:hover {
     color: white;
@@ -271,7 +241,7 @@ gap: 15px;
 /* Обычная кнопка скачивания */
 .download-btn {
     display: inline-block;
-    margin-top: 20px;
+    margin-top: 10px;
     background-color: #2196F3;
     color: white;
     padding: 10px 20px;
@@ -294,29 +264,7 @@ gap: 15px;
 }
 
 /* Полноэкранный лайтбокс с зумом и перетаскиванием */
-.image-lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Чтобы увеличенная картинка не вылезала за скроллы */
-}
 
-.image-lightbox img {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 4px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.7);
-    cursor: zoom-in;
-    user-select: none;
-    transition: transform 0.05s ease-out; /* Плавность при клике */
-}
 
 /* Блок участников */
 .players-container {
@@ -493,7 +441,7 @@ gap: 15px;
     position: fixed;
     bottom: -8px; /* Убирается за край экрана по своей высоте */
     left: 0;
-    width: 100vw;
+    width: 100%; 
     height: 10px;  /* Уменьшенная высота полоски */
     background: rgba(20, 20, 20, 0.6);
     backdrop-filter: blur(6px);
@@ -515,6 +463,1239 @@ gap: 15px;
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #ff9800, #ff5722);
-    box-shadow: 0 0 12px rgba(255, 152, 0, 0.8);
-    transition: width 0.08s ease-out;
+    border-radius: 10px;
+    box-shadow: 0 0 8px #ff9800;
+    /* Строка transition удалена */
 }
+
+
+#autumn-leaves-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    perspective: 800px;
+}
+
+.autumn-leaf {
+    position: absolute;
+    top: -60px;
+    border-radius: 0 50% 50% 50%;
+    transform-style: preserve-3d;
+}
+
+/* Безопасное 3D-вращение: X и Y меняются в узких пределах, а Z крутится на полный оборот */
+@keyframes fallAndRotateSafe {
+    0% {
+        transform: translateY(-50px) translateX(0px) rotateX(var(--rot-x-start)) rotateY(var(--rot-y-start)) rotateZ(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--max-opacity);
+    }
+    90% {
+        opacity: var(--max-opacity);
+    }
+    100% {
+        transform: translateY(110vh) translateX(var(--wind-drift)) rotateX(var(--rot-x-end)) rotateY(var(--rot-y-end)) rotateZ(720deg);
+        opacity: 0;
+    }
+}
+
+
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    background-color: #f0f8ff;
+    border-radius: 50%;
+}
+
+@keyframes snowFall {
+    0% { transform: translateY(-10vh) translateX(0); }
+    100% { transform: translateY(110vh) translateX(20px); }
+}
+
+
+/* Контейнер фонового сезонного тинта */
+#seasonal-filter {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Не мешает кликам */
+    z-index: 0;
+    transition: background 1.5s ease;
+}
+
+/* Осень: Едва заметный тёплый оранжевый оттенок */
+.filter-autumn {
+    background: radial-gradient(circle, rgba(255, 152, 0, 0.04) 0%, rgba(216, 67, 21, 0.01) 100%);
+}
+
+/* Зима: Легчайший прохладный голубоватый оттенок */
+.filter-winter {
+    background: radial-gradient(circle, rgba(144, 202, 249, 0.04) 0%, rgba(21, 101, 192, 0.01) 100%);
+}
+
+/* Весна: Мягкий нежно-зеленоватый оттенок */
+.filter-spring {
+    background: radial-gradient(circle, rgba(165, 214, 167, 0.04) 0%, rgba(46, 125, 50, 0.01) 100%);
+}
+
+/* Лето: Очень легкий солнечно-золотистый оттенок */
+.filter-summer {
+    background: radial-gradient(circle, rgba(255, 235, 59, 0.04) 0%, rgba(255, 160, 0, 0.01) 100%);
+}
+
+
+
+/* --- СВЕТЛАЯ НАВИГАЦИЯ (GLASSMORPHISM) --- */
+.top-nav-right {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    
+    /* Светлый полупрозрачный фон с эффектом размытия заднего плана */
+    background-color: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px; 
+    padding: 6px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    color: #f1f1f1; 
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 255, 255, 0.25); 
+}
+
+/* Состояние, когда погода/фильтр отключены */
+.icon-btn.disabled::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 15%;
+    width: 70%;
+    height: 2px;
+    background-color: #f1f1f1;
+    transform: translateY(-50%) rotate(-45deg);
+    border-radius: 1px;
+}
+
+.icon-btn.disabled:hover {
+    opacity: 0.7;
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.icon-btn.disabled {
+    opacity: 0.4;
+    position: relative;
+}
+
+/* --- СТИЛИ ВСТРОЕННОЙ КОНСОЛИ --- */
+.console-modal {
+    display: none; /* Скрыта по умолчанию */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.console-modal.active {
+    display: flex;
+}
+
+.console-modal-content {
+    width: 90%;
+    max-width: 580px;
+    background: rgba(18, 20, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.console-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.console-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #4fc3f7;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.console-close {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.console-close:hover {
+    color: #fff;
+}
+
+/* Область вывода текста */
+.console-output {
+    height: 220px;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #e0e0e0;
+}
+
+.console-line.user {
+    color: #4caf50;
+}
+
+.console-line.system {
+    color: #b0bec5;
+}
+
+.console-line.success {
+    color: #81c784;
+}
+
+.console-line.error {
+    color: #e57373;
+}
+
+.console-line.secret {
+    color: #ffd54f;
+    font-weight: bold;
+}
+
+/* Строка ввода */
+.console-input-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.console-prompt {
+    color: #4fc3f7;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+#console-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.console-send-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.console-send-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+
+/* --- ВЕСНА (Март, Апрель): Легкий дождевой эффект --- */
+#spring-rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.spring-raindrop {
+    position: absolute;
+    width: 2.2px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7)); /* Белые капли */
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes springRain {
+    0% {
+        transform: translateY(-10vh) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        /* Падают вниз на 100vh с небольшим смещением вбок от ветра */
+        transform: translateY(105vh) translateX(-20vw);
+        opacity: 0;
+    }
+}
+
+/* --- МАЙ: Светлячки (Предвкушение каникул) --- */
+#may-fireflies-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.may-firefly {
+    position: absolute;
+    background-color: #e6ee9c;
+    border-radius: 50%;
+    box-shadow: 0 0 10px 3px rgba(230, 238, 156, 0.6);
+    opacity: 0;
+}
+
+@keyframes fireflyFloat {
+    0% { transform: translateY(0) scale(0.8); opacity: 0; }
+    50% { opacity: 1; transform: translateY(-3vh) scale(1.2); }
+    100% { transform: translateY(-6vh) scale(0.8); opacity: 0; }
+}
+
+
+
+.summer-glare {
+    position: absolute;
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,223,105,0.3) 40%, rgba(255,255,255,0) 80%);
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0;
+}
+
+/* --- ЛЕТО: Солнечный свет сбоку и цветовые переливы --- */
+#seasonal-filter.filter-summer {
+    /* Направленный мягкий свет из правого верхнего угла + тёплые переливы */
+    background: radial-gradient(circle at 85% 15%, rgba(255, 215, 0, 0.08) 0%, rgba(255, 140, 0, 0.03) 45%, rgba(15, 15, 15, 0) 80%);
+    /* Плавная анимация «дыхания» света */
+    animation: sunGlowBreath 8s ease-in-out infinite alternate;
+}
+
+@keyframes sunGlowBreath {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+
+/* Убираем захват со всего фона, но оставляем блокировку синего выделения текста */
+#scroll-container {
+    cursor: default; 
+    user-select: none; 
+    -webkit-user-select: none; 
+}
+
+/* Создаем широкий невидимый хитбокс ровно поверх линии */
+.timeline-drag-area {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 50px; /* По 50px вверх и вниз от центральной оси */
+    transform: translateY(-50%);
+    z-index: 1; /* Оставляем хитбокс под точками, у которых z-index: 2[cite: 4] */
+    cursor: grab;
+}
+
+#scroll-container.dragging .timeline-drag-area {
+    cursor: grabbing;
+}
+
+#scroll-container.dragging .season-node {
+    pointer-events: none;
+}
+
+/* Класс для плавного исчезновения погодного контейнера */
+.weather-fade-out {
+    animation: weatherFadeOut 0.5s ease forwards;
+}
+
+@keyframes weatherFadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+/* --- Кнопка новостей слева --- */
+
+
+/* --- ПЛАВНАЯ АНИМАЦИЯ ДЛЯ КНОПКИ НОВОСТЕЙ --- */
+.news-icon-btn {
+    animation: smoothColorGlow 4s infinite ease-in-out;
+}
+
+@keyframes smoothColorGlow {
+    0% {
+        color: #ff9800; /* Основной оранжевый цвет сайта */
+        filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.4));
+    }
+    50% {
+        color: #ffc107; /* Мягкий кораллово-красный */
+        filter: drop-shadow(0 0 6px rgba(255, 82, 82, 0.6));
+    }
+    100% {
+        color: #ff9800;
+        filter: drop-shadow(0 0 2px rgba(255, 152, 0, 0.4));
+    }
+}
+
+/* При наведении делаем акцент чуть ярче */
+.news-icon-btn:hover {
+    animation-play-state: paused; 
+    color: #ffffff;
+    background-color: rgba(255, 152, 0, 0.3);
+}
+
+
+/* =========================================
+   ОКНО НОВОСТЕЙ
+========================================= */
+
+
+
+/* 3. Контейнер, который мы теперь скроллим */
+#news-container {
+    padding: 30px;
+    overflow-y: auto;
+    flex-grow: 1; /* Заставляет блок занять все оставшееся место */
+}
+
+/* =========================================
+   СТИЛЬ ДАТЫ: "ПОЛОСКА - ДАТА - ПОЛОСКА"
+========================================= */
+.news-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #aaa;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 10px 0 25px 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Сами полоски */
+.news-date::before,
+.news-date::after {
+    content: '';
+    flex: 1; /* Заставляем полоски занять всё свободное пространство по бокам */
+    border-bottom: 2px solid #555;
+}
+
+.news-date::before {
+    margin-right: 15px; /* Отступ до текста */
+}
+
+.news-date::after {
+    margin-left: 15px; /* Отступ после текста */
+}
+
+/* =========================================
+   ПРОЧИЕ СТИЛИ НОВОСТЕЙ
+========================================= */
+.news-item {
+    margin-bottom: 50px;
+}
+
+.news-item:last-child {
+    margin-bottom: 0;
+}
+
+.news-item h2 {
+    text-align: center;
+    margin-top: 0;
+}
+
+.news-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Добавляем сочную тень картинкам */
+}
+
+.news-item ul {
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+
+/* --- КАСТОМНАЯ ПОЛОСА ПРОКРУТКИ БЕЗ ФОНА И СТРЕЛОК --- */
+
+/* Для Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+}
+
+/* Для Chrome, Edge, Safari — делаем полосу шире (например, 12px) */
+::-webkit-scrollbar {
+    width: 12px;   
+    height: 12px;  
+}
+
+/* Убираем фон дорожки */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Ползунок: делаем шире и короче за счет прозрачных отступов сверху и снизу */
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25); /* Серовато-полупрозрачный оттенок */
+    border-radius: 10px;
+    
+    /* Эти отступы уменьшают высоту ползунка, делая его короче */
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 14px solid transparent;    /* Отступ сверху (скрывает верхнюю часть) */
+    border-bottom: 14px solid transparent; /* Отступ снизу */
+    
+    background-clip: padding-box;
+    transition: background 0.2s ease;
+}
+
+/* Эффект при наведении на ползунок */
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 152, 0, 0.7); /* Оранжевый при наведении */
+}
+
+/* Принудительное отключение всех стрелок и кнопок прокрутки в WebKit */
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:vertical:decrement,
+::-webkit-scrollbar-button:vertical:increment,
+::-webkit-scrollbar-button:horizontal:decrement,
+::-webkit-scrollbar-button:horizontal:increment {
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
+}
+
+
+/* --- 1. ФИКС ИНТЕРАКТИВНОГО ЛОГОТИПА И ЧАСТИЦ --- */
+/* --- ИНТЕРАКТИВНЫЙ ЛОГОТИП И ЧАСТИЦЫ --- */
+#interactive-logo {
+    position: absolute; /* или fixed, как у тебя прописано */
+    left: 50%;
+    translate: -50% 0; /* Это свойство не будет перебиваться анимацией transform */
+}
+
+#logo-text {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 152, 0, 0.4);
+}
+
+/* Анимация подпрыгивания и встряхивания надписи при клике */
+.logo-bounce-shake {
+    animation: logoBounceShake 0.5s ease-in-out;
+}
+
+@keyframes logoBounceShake {
+    0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    20% { transform: translateX(-50%) translateY(-14px) rotate(-4deg); }
+    40% { transform: translateX(-50%) translateY(-16px) rotate(4deg); }
+    60% { transform: translateX(-50%) translateY(-6px) rotate(-2deg); }
+    80% { transform: translateX(-50%) translateY(-2px) rotate(1deg); }
+    100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+#logo-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.logo-particle {
+    position: absolute;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+.logo-teleport-shake {
+    animation: teleportShake 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+}
+
+
+@keyframes particleFallOff {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 1;
+    }
+    20% {
+        transform: translateY(-10px) rotate(15deg) scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(120px) rotate(360deg) scale(0.3);
+        opacity: 0;
+    }
+}
+
+
+
+
+.logo-shake {
+    animation: logoShakeAnim 0.4s ease-in-out;
+}
+
+@keyframes logo-shake {
+    0% { transform: translateX(-50%) rotate(0deg); }
+    50% { transform: translateX(-50%) rotate(5deg); }
+    100% { transform: translateX(-50%) rotate(0deg); }
+}
+
+@keyframes logoShakeAnim {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    25% { transform: rotate(-2deg) translateX(-2px); }
+    50% { transform: rotate(2deg) translateX(2px); }
+    75% { transform: rotate(-1deg) translateX(-1px); }
+}
+
+
+.logo-particle.landing {
+    /* Скорость падения берется из JS */
+    animation: particleLandOnLogo var(--fall-duration, 0.9s) cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+
+@keyframes particleLandOnLogo {
+    0% {
+        transform: translateY(-40px) scale(0.4) 
+                   rotateX(var(--rot-x, 0deg)) 
+                   rotateY(var(--rot-y, 0deg)) 
+                   rotateZ(var(--rot-z-start, -20deg));
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1) 
+                   rotateX(var(--rot-x, 0deg)) 
+                   rotateY(var(--rot-y, 0deg)) 
+                   rotateZ(var(--rot-z-end, 0deg));
+        opacity: 1;
+    }
+}
+
+/* Сдувание ветром */
+.logo-particle.falling-off {
+    animation: particleFallOffLogo 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+}
+
+@keyframes particleFallOffLogo {
+    0% {
+        transform: translateY(0) 
+                   rotateX(var(--rot-x, 0deg)) 
+                   rotateY(var(--rot-y, 0deg)) 
+                   rotateZ(var(--rot-z-end, 0deg));
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(200px) translateX(var(--wind-drift, 40px)) 
+                   rotateX(var(--rot-x, 0deg)) 
+                   rotateY(var(--rot-y, 0deg)) 
+                   rotateZ(calc(var(--rot-z-end, 0deg) + var(--rot-fall, 180deg)));
+        opacity: 0;
+    }
+}
+
+
+/* =========================================
+   ВСПЛЫВАЮЩИЙ ТИР-ЛИСТ
+========================================= */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+
+.modal-header {
+    background-color: #2c2c34;
+    padding: 15px 20px;
+    /* Убрали border-bottom, чтобы не было уродливой серой линии при скролле */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Добавили мягкую тень для отделения шапки от контента */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.modal-header h1,
+.modal-header h2 {
+    margin: 0;
+    color: #ffffff; /* Заменили оранжевый на белый */
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px; /* Чуть разрядили буквы для стиля */
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.close-btn:hover { color: #ff9800; }
+
+
+
+/* =========================================
+   ЕДИНЫЙ СТИЛЬ ВСЕХ МОДАЛЬНЫХ ОКОН
+========================================= */
+
+/* Главный контейнер окна */
+.modal-content {
+    background-color: #2c2c34;
+    width: 80%;
+    max-width: 850px;
+    max-height: 95vh;
+    overflow-y: auto;
+    padding: 30px;
+    border-radius: 8px;
+    position: relative;
+    border: 2px solid #555;
+    
+    /* Начальное положение (когда окно закрыто) — смещено вниз */
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Увеличили отступ сверху, чтобы текст не лип к краю, и по бокам */
+.modal-header {
+    background-color: #2c2c34;
+    padding: 25px 40px 15px 40px; /* 25px сверху, 40px по бокам */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+/* Единый стиль текста в плашке */
+.modal-header h1,
+.modal-content h2 {
+    color: #e9e9e9;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Единый крестик (теперь центрируется относительно плашки) */
+.modal-header .close-btn {
+    position: absolute;
+    top: 50%;
+    right: 30px; 
+    transform: translateY(-50%);
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+.modal-header .close-btn:hover {
+    color: #ff9800;
+}
+
+/* Скроллируемая часть с самим контентом */
+.modal-body {
+    padding: 15px 40px 35px 40px; /* 40px по бокам, чуть больше снизу */
+    overflow-y: auto;
+    flex-grow: 1;
+    background-color: #2c2c34;
+}
+
+
+
+.modal-body > *:first-child {
+    margin-top: 0 !important;
+}
+
+
+.modal-divider {
+    width: 100%;
+    height: 3px;
+    background-color: #555; /* Цвет полоски */
+    margin: 20px 0; /* Отступ 30px сверху и снизу от контента */
+    opacity: 0.7; /* Делаем её не слишком яркой */
+}
+
+.modal-window { /* Замените на ваш селектор модального окна */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Ваши текущие размеры, ширина, высота, фоны и рамки остаются прежними */
+}
+
+
+/* Фиксированная верхняя плашка */
+.season-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: #252526; /* Укажите точный цвет фона вашего модального окна, чтобы контент под ним не просвечивал */
+    z-index: 100;
+    padding: 12px 20px; /* Настройте отступы под ваш дизайн */
+}
+
+/* Название сезона слева */
+.season-modal-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Кнопка закрытия (крестик) справа */
+.season-close-btn {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+
+/* Прокручиваемая область под плашкой */
+.season-modal-body {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 20px; /* Перенесите сюда внутренние отступы, которые были у вашего модального окна */
+}
+
+/* --- СТИЛИ ФИКСИРОВАННОЙ ШАПКИ МОДАЛКИ СЕЗОНА --- */
+
+/* Контейнер модалки сезона (запрещаем скролл всего окна) */
+.season-modal-content {
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden !important;
+}
+
+/* Верхняя фиксированная плашка */
+.season-modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 25px;
+    background-color: #24242b; /* Цвет фона плашки */
+    border-bottom: 2px solid #555;
+    flex-shrink: 0;
+}
+
+/* Название сезона слева в плашке */
+.season-modal-content .modal-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: #ffffff;
+}
+
+/* Крестик справа в плашке */
+.season-modal-content .modal-header .close-btn {
+    position: static;
+    transform: none;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Область с текстом и картинками, которая скроллится */
+.season-modal-content .modal-body {
+    padding: 25px 30px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+
+
+/* --- СТИЛИ ТИР-ЛИСТА --- */
+.tier-row {
+    display: flex;
+    align-items: stretch;
+    min-height: 80px; /* Фиксированная минимальная высота строки */
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.tier-label {
+    width: 80px;
+    display: flex;
+    justify-content: center;      /* Вертикальное центрирование содержимого */
+    align-items: center;          /* Горизонтальное центрирование блока */
+    text-align: center;           /* Выравнивание каждой строки текста по центру */
+    font-size: 1.05rem;;
+    font-weight: bold;
+    color: #1e1e24;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+
+    /* Правила переноса и редактирования */
+    word-break: break-word;       /* Перенос длинных слов */
+    overflow-wrap: anywhere;      /* Предотвращает вылезание текста за границы */
+    padding: 4px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: text;
+    user-select: text;
+    transition: box-shadow 0.2s ease;
+}
+
+.tier-items-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.tier-item-card {
+    user-select: none;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.2s ease;
+}
+
+.tier-item-card:hover {
+    user-select: none;
+    transform: scale(1.08);
+    cursor: pointer;
+}
+
+.tier-item-card img {
+    user-select: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tier-empty {
+    color: #777;
+    font-style: italic;
+    font-size: 0.9rem;
+    padding-left: 5px;
+}
+
+/* Модификатор ширины специально для окна тир-листа */
+.tierlist-wide {
+    max-width: 600px !important; /* Ставь любую нужную тебе ширину (например 1000px или 1200px) */
+    width: 95%; /* Защита, чтобы на телефонах окно не вылезало за края экрана */
+}
+
+/* Пул нераспределенных иконок внизу тир-листа */
+.tier-pool {
+    min-height: 80px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+/* Эффект подсветки зоны, когда над ней проносят иконку */
+.tier-items-container.drag-over,
+.tier-pool.drag-over {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ff9800; /* Оранжевый акцент */
+}
+
+/* Скрываем иконку на старом месте во время перетаскивания */
+.tier-item-card.dragging {
+    opacity: 0.4;
+}
+
+/* Полностью запрещаем выделение текста и элементов во всем блоке игроков и модалках */
+.players-container,
+.players-grid,
+.player-card,
+.modal-content {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Отключаем перетаскивание картинок внутри карточек (чтобы не тягался «призрак» картинки) */
+.player-card img,
+.player-head {
+    -webkit-user-drag: none;
+}
+
+
+/* Отключаем стандартный Drag-n-Drop браузера для иконки/руки */
+.draggable-icon {
+    user-select: none;
+    -webkit-user-drag: none;
+    touch-action: none; /* Отключаем дефолтные скроллы/жесты на мобилках */
+    cursor: grab;
+}
+
+.draggable-icon:active {
+    cursor: grabbing;
+}
+
+/* Класс для элемента, который «летит» за курсором */
+.dragging-clone {
+    position: fixed;
+    pointer-events: none; /* Чтобы мышь «не видела» элемент под собой */
+    z-index: 9999;
+    transform-origin: center center;
+    transition: transform 0.1s ease-out; /* Плавность для физики */
+}
+
+/* Анимация приземления (всплеск / пружинка / scale-down) */
+@keyframes landBounce {
+    0% { transform: scale(1.3) rotate(10deg); }
+    50% { transform: scale(0.9) rotate(-5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.landing-animation {
+    animation: landBounce 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+
+/* Полностью отключаем нативный drag у любых картинок */
+img, 
+.draggable-icon, 
+.player-head, 
+.tier-item-card img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+
+/* =========================================
+   КНОПКИ УПРАВЛЕНИЯ ТИР-ЛИСТОМ (Справа)
+========================================= */
+.tier-controls {
+    display: flex;
+    flex-direction: column;
+    width: 32px;
+    background: rgba(0, 0, 0, 0.4);
+    border-left: 2px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+}
+
+.tier-control-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s, color 0.2s;
+    padding: 0;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.tier-control-btn:last-child {
+    border-bottom: none;
+}
+
+/* Иконка шестеренки */
+.tier-control-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* Эффекты при наведении */
+.tier-control-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+/* Красный цвет для удаления (Минус) */
+.tier-control-btn.delete:hover {
+    background: rgba(244, 67, 54, 0.2);
+    color: #f44336;
+}
+
+/* Зеленый цвет для добавления (Плюс) */
+.tier-control-btn.add:hover {
+    background: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+}
+
+/* Синий цвет для настроек (Шестеренка) */
+.tier-control-btn.gear:hover {
+    background: rgba(33, 150, 243, 0.2);
+    color: #2196F3;
+}
+
+
+/* Указываем курсор для пустой зоны перетаскивания строк */
+.tier-items-container {
+    cursor: grab;
+}
+
+.tier-items-container:active {
+    cursor: grabbing;
+}
+
+/* Иконки внутри всё ещё можно брать рукой */
+.tier-item-card {
+    cursor: grab;
+}
+.tier-row {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.tier-row.placeholder {
+    border: none !important;
+    background: transparent !important;
+    outline: none !important;
+}
+

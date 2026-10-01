@@ -29,15 +29,16 @@ seasons.push({
             type: "players",
             title: "Состав участников:",
             list: [
-                { name: "Mes4000", head: "images/heads/!mes.webp", altNames: ["Mes4000", "mes", "Семён", "Глиномес", "Мес"] },     // Получит случайную голову из папки heads
-                { name: "sneget_", head: "images/heads/!sneget.webp", altNames: ["sneget_", "Егор", "снегет", "снегр"]  },       // Получит случайную голову из папки heads
-                { name: "danil_lisov", head: "images/heads/!danil.webp", altNames: ["danil_lisov", "tayen_42", "tayen_52", "Данил"]  } ,
-                { name: "Shuranella", head: "images/heads/!shuranells.webp", altNames: ["Shuranella", "Шершуля", "жир", "Чурчхела", "Саня", "Сасаня" ] } ,
-                { name: "Saba228", altNames: ["Saba228", "Сава", "свиноблуд"] },
-                { name: "Maksos_0909", altNames: ["Maksos_0909", "Максос", "Maksimka", "Макс", "Максим"] },
-                { name: "KiberNagibator", altNames: ["KiberNagibator", "Лапша", "Насвай", "o da doza"]  }, 
-                { name: "Jerty", altNames: ["Jerty", "Арсений", "Montana", "Жирти", "Жирнов", "Джирти", "jez3as"]  },
-                { name: "Nikita_criptomainer", altNames: ["Nikita_criptomainer", "Железный Никита"] }
+                // СПИСОК ИГРОКОВ  // СПИСОК ИГРОКОВ  // СПИСОК ИГРОКОВ  // СПИСОК ИГРОКОВ  // СПИСОК ИГРОКОВ  
+                "Mes4000",
+                "sneget_",
+                "danil_lisov",
+                "Shuranella",
+                "Saba228", 
+                "Maksos_0909",
+                "KiberNagibator",
+                "Jerty",
+                "Nikita_criptomainer"
 
             ]
         }
@@ -45,10 +46,10 @@ seasons.push({
 
     // 2. ВСЕ картинки этого сезона (нужно для автоматического хвоста в конце)
     allImages: [
-        "images/season3/02.02.2024.png",
-        "images/season3/15.02.2024.png" ,
-        "images/season3/16.02.2024.png" ,
-        "images/season3/18.02.2024.png" ,
+        "images/season3/02-02-2024.png",
+        "images/season3/15-02-2024.png" ,
+        "images/season3/16-02-2024.png" ,
+        "images/season3/18-02-2024.png" ,
         "images/season3/232.png" ,
         "images/season3/Base_Profile_Screenshot_2024.02.08_-_15.24.00.25.png" ,
         "images/season3/image (1).png" ,
